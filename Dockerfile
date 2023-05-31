@@ -1,17 +1,14 @@
 FROM nginx:latest
 WORKDIR /var/www/html
 RUN rm /etc/nginx/conf.d/default.conf
-COPY . /var/www/html  
+COPY . /var/www/html
 COPY default.conf /etc/nginx/conf.d/default.conf
-RUN apt-get update
+RUN apt-get update -y
+RUN apt-get install python3-pip -y
 RUN pip install -r requirements.txt
-RUN apt-get update -y \
-    && apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev libsnmp-dev
+RUN apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev libsnmp-dev -y
 
-RUN sudo apt-get install python3
-RUN sudo apt-get install python3-flask
-RUN sudo apt-get install python3-pymysql
-RUN sudo apt-get install python3-boto3
+RUN apt-get install python3 python3-flask python3-pymysql python3-boto3 -y
 # Expose port 80
 EXPOSE 80
 ENTRYPOINT ["python", "EmpApp.py"]
