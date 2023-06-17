@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python
 WORKDIR /var/www/html
 RUN apt-get update
 RUN apt-get install nginx -y
